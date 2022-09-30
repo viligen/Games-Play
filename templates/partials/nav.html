@@ -1,5 +1,11 @@
+
+
 <nav>
+    {% if profile %}
     <a href="{% url 'dashboard' %}">Dashboard</a>
     <a href="{% url 'create game' %}">Create Game</a>
     <a href="{% url 'details profile' %}">Profile</a>
+    {% else %}
+        <a href="{% url 'create profile' %}">Create Profile</a>
+    {% endif %}
 </nav>
