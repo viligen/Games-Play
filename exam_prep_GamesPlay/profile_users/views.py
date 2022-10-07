@@ -14,6 +14,7 @@ def create_profile(request):
 
 def details_profile(request):
     profile = Profile.objects.all()[0]
+    # games = Game.objects.filter(owner_id=profile.id)
     games = Game.objects.all()
     games_count = len(games)
     average_rating = sum([g.rating for g in games])/games_count if games_count > 0 else 0

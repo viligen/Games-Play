@@ -21,8 +21,9 @@ def index(request):
 
 
 def dashboard(request):
-    games = Game.objects.all()
     profile = get_profile()
+    games = Game.objects.filter(owner_id=profile.id)
+
     context = {
         'games': games,
         'profile': profile

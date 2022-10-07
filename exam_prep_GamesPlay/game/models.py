@@ -1,6 +1,7 @@
 from django.db import models
 
 from exam_prep_GamesPlay import validators
+from exam_prep_GamesPlay.profile_users.models import Profile
 
 
 # Create your models here.
@@ -39,4 +40,9 @@ class Game(models.Model):
     summary = models.TextField(
         null=True,
         blank=True,
+    )
+    owner = models.ForeignKey(
+        Profile,
+        on_delete=models.CASCADE,
+
     )
