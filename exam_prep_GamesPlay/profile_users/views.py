@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
+from exam_prep_GamesPlay.common.views import get_profile
 from exam_prep_GamesPlay.game.models import Game
+from exam_prep_GamesPlay.profile_users.forms import CreatProfile, DeleteProfile, EditProfile
 from exam_prep_GamesPlay.profile_users.models import Profile
 
 
@@ -8,8 +10,20 @@ from exam_prep_GamesPlay.profile_users.models import Profile
 
 
 def create_profile(request):
+    form = CreatProfile()
+    if request.method == 'POST':
+        form = CreatProfile(request.POST)
+        form.full_clean()
+        if form.is_valid():
+            form.save()
 
-    return render(request, 'profile/create-profile.html')
+            return redirect('home')
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'profile/create-profile.html', context)
 
 
 def details_profile(request):
@@ -27,8 +41,35 @@ def details_profile(request):
 
 
 def edit_profile(request):
-    return render(request, 'profile/edit-profile.html')
+    profile = get_profile()
+    form = EditProfile(instance=profile)
+
+    if request.method == 'POST':
+        form = EditProfile(request.POST, instance=profile)
+        form.full_clean()
+        if form.is_valid():
+            form.save()
+
+            return redirect('details profile')
+    context = {
+        'profile': profile,
+        'form': form,
+    }
+
+    return render(request, 'profile/edit-profile.html', context)
 
 
 def delete_profile(request):
-    return render(request, 'profile/delete-profile.html')
+    profile = get_profile()
+    form = DeleteProfile(instance=profile)
+    if request.method == 'POST':
+        profile.delete()
+        return redirect('home')
+
+    context = {
+        'profile': profile,
+        'form': form,
+
+    }
+
+    return render(request, 'profile/delete-profile.html', context)
