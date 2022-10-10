@@ -1,6 +1,8 @@
 from django.db import models
 
 from exam_prep_GamesPlay import validators
+from exam_prep_GamesPlay.common.utils import get_profile
+
 from exam_prep_GamesPlay.profile_users.models import Profile
 
 
@@ -12,7 +14,6 @@ class Game(models.Model):
     MAX_LEN_CATEGORY = 15
     AVAILABLE_CATEGORIES = tuple([(c, c) for c in ["Action", "Adventure", "Puzzle", "Strategy", "Sports",
                                                    "Board/Card Game", "Other"]])
-    print(AVAILABLE_CATEGORIES)
 
     title = models.CharField(
         max_length=MAX_LEN_TITLE,
@@ -32,7 +33,9 @@ class Game(models.Model):
         null=True,
         blank=True,
 
-        validators=(validators.validate_max_level, )
+        validators=(validators.validate_max_level, ),
+        verbose_name='Max Level'
+
     )
 
     image_URL = models.URLField()
@@ -44,5 +47,6 @@ class Game(models.Model):
     owner = models.ForeignKey(
         Profile,
         on_delete=models.CASCADE,
+        default=get_profile().id
 
     )

@@ -19,4 +19,7 @@ class CreatProfile(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('email', 'age', 'password')
-        extra_kwargs = {'password': {'write_only': True}}
+        # extra_kwargs = {'password': {'write_only': True}}
+        widgets = {
+            'password': forms.PasswordInput()
+        }

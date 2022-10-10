@@ -1,15 +1,10 @@
 from django.shortcuts import render
 
+from exam_prep_GamesPlay.common.utils import get_profile
 from exam_prep_GamesPlay.game.models import Game
-from exam_prep_GamesPlay.profile_users.models import Profile
 
 
 # Create your views here.
-def get_profile():
-    profile = Profile.objects.all()
-    if profile:
-        return profile[0]
-    return None
 
 
 def index(request):

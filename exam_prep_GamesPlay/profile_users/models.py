@@ -22,23 +22,26 @@ class Profile(models.Model):
         max_length=MAX_LEN,
         null=True,
         blank=True,
+        verbose_name='First Name',
     )
 
     last_name = models.CharField(
         max_length=MAX_LEN,
         null=True,
         blank=True,
+        verbose_name='Last Name',
     )
 
     profile_picture = models.URLField(
         null=True,
         blank=True,
+        verbose_name='Profile Picture',
     )
 
     @property
     def full_name(self):
         if self.first_name and self.last_name:
-            return f'{self.first_name} {self.last_name}'.strip()
+            return f'{self.first_name.strip()} {self.last_name.strip()}'
         elif self.first_name:
             return f'{self.first_name}'.strip()
         elif self.last_name:

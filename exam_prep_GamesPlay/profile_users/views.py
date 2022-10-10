@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from exam_prep_GamesPlay.common.views import get_profile
+from exam_prep_GamesPlay.common.utils import get_profile
 from exam_prep_GamesPlay.game.models import Game
 from exam_prep_GamesPlay.profile_users.forms import CreatProfile, DeleteProfile, EditProfile
 from exam_prep_GamesPlay.profile_users.models import Profile
