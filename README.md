@@ -1,3 +1,2 @@
 # Games-Play
-exam prep repo
-Django MTV
+exam prep repo Django MTV
